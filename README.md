@@ -6,13 +6,13 @@ It includes **conversational memory** and **query reformulation** to handle foll
 
 ---
 
-## 🏗️ Architecture Diagram
+## Architecture Diagram
 
-![Architecture Diagram](images/architecture.png?v=2)
+![Architecture Diagram](images/architecture.png)
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
 *   **ChatGPT-style Interface**: A clean, modern, dark-themed responsive chat interface.
 *   **Conversational Memory**: Retains the context of the chat session (up to 3 full turns), allowing it to interpret follow-up questions (e.g. asking "Who is Nikola Tesla?" followed by "when did he die?").
@@ -25,26 +25,28 @@ It includes **conversational memory** and **query reformulation** to handle foll
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```text
+├── images/
+│   └── architecture.png # System architecture diagram
 ├── static/
-│   ├── index.html   # Main chat webpage layout
-│   ├── style.css    # Clean ChatGPT-style styling
-│   └── script.js    # Session state, markdown rendering, & API calls
-├── app.py           # FastAPI backend & Google GenAI RAG logic
-├── requirements.txt # Python dependency configuration
-├── .gitignore       # Deployment safeguard for environment keys
-└── README.md        # Documentation
+│   ├── index.html       # Main chat webpage layout
+│   ├── style.css        # Clean ChatGPT-style styling
+│   └── script.js        # Session state, markdown rendering, & API calls
+├── app.py               # FastAPI backend & Google GenAI RAG logic
+├── requirements.txt     # Python dependency configuration
+├── .gitignore           # Deployment safeguard for environment keys
+└── README.md            # Documentation
 ```
 
 ---
 
-## 🚀 Local Installation & Setup
+## Local Installation & Setup
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/WikiGPT.git
+git clone https://github.com/Naman-Vasudev/WikiGPT.git
 cd WikiGPT
 ```
 
@@ -69,8 +71,11 @@ Open **[http://127.0.0.1:8000](http://127.0.0.1:8000)** in your web browser to s
 
 ---
 
-## ☁️ Deployment (Free on Render)
+## Deployment (Free on Render)
 
+The live application is hosted at: **[https://wikigpt-oiua.onrender.com/](https://wikigpt-oiua.onrender.com/)**
+
+To deploy your own instance:
 1. Create a new **Web Service** on **[Render](https://render.com/)**.
 2. Connect your GitHub repository.
 3. Configure the following environment settings:
