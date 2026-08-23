@@ -15,7 +15,9 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 load_dotenv()
 
 # Set custom user agent for Wikipedia API queries to prevent blocking/rate-limiting
-wikipedia.set_user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+# Using a unique policy-compliant header based on the Render deployment hostname
+render_host = os.getenv("RENDER_EXTERNAL_HOSTNAME", "localhost")
+wikipedia.set_user_agent(f"WikiGPT/1.0 (https://{render_host}; contact@example.com)")
 
 # Initialize FastAPI
 app = FastAPI(title="WikiGPT API")
@@ -40,8 +42,18 @@ class ChatRequest(BaseModel):
 
 def get_wikipedia_content(query, max_results=3):
     try:
-        # Search wikipedia for the query
-        search_results = wikipedia.search(query, results=max_results)
+        # Search wikipedia for the query with retries
+        import time
+        search_results = []
+        for attempt in range(3):
+            try:
+                search_results = wikipedia.search(query, results=max_results)
+                break
+            except Exception:
+                if attempt == 2:
+                    return [], "Wikipedia API is temporarily rate-limiting this server. Please try again in a few seconds."
+                time.sleep(1.5)
+
         if not search_results:
             return [], f"No Wikipedia articles found for '{query}'."
 
