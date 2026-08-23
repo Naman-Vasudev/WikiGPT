@@ -8,7 +8,7 @@ It includes **conversational memory** and **query reformulation** to handle foll
 
 ## 🏗️ Architecture Diagram
 
-![Architecture Diagram](images/architecture.png)
+![Architecture Diagram](images/architecture.png?v=2)
 
 ---
 
