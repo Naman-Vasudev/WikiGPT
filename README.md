@@ -11,15 +11,19 @@ It includes **conversational memory** and **query reformulation** to handle foll
 ```mermaid
 graph TD
     User([User in Web Browser]) -->|Sends query| UI[HTML/CSS/JS Frontend]
+    UI -->|Renders Chat Bubbles| User
+    
     UI -->|POST /api/chat| Backend[FastAPI Server]
+    Backend -->|Answer + Citations| UI
+    
     Backend -->|Search query| WikiAPI[Wikipedia API]
     WikiAPI -->|Articles| Backend
+    
     Backend -->|Generate Embeddings| GeminiEmbed[Gemini Embedding API]
     Backend -->|Index chunks| FAISS[FAISS Vector Store]
+    
     Backend -->|Prompt with Context| GeminiLLM[Gemini 2.5 Flash API]
     GeminiLLM -->|Answer| Backend
-    Backend -->|Answer + Citations| UI
-    UI -->|Renders Chat Bubbles| User
 ```
 
 ---
