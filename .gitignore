@@ -1,0 +1,16 @@
+# Environment variables (must be kept secret!)
+.env
+
+# Python caching
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Local Vector stores
+faiss_index/
+
+# OS files
+.DS_Store
+Thumbs.db

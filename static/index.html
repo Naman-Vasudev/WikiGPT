@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WikiGPT - Wikipedia Chatbot</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Google Fonts for Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Marked.js CDN for parsing markdown in responses -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    <span>WikiGPT</span>
+                </div>
+                <button class="new-chat-btn" id="new-chat-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    New Chat
+                </button>
+            </div>
+            
+            <div class="sidebar-content">
+                <div class="info-card">
+                    <h3>How it works</h3>
+                    <p>WikiGPT is a dynamic RAG (Retrieval-Augmented Generation) chatbot. When you ask a question:</p>
+                    <ol>
+                        <li>It searches Wikipedia for the top matching articles.</li>
+                        <li>It embeds the articles dynamically into a local vector database.</li>
+                        <li>It finds the most relevant segments.</li>
+                        <li>Google Gemini synthesizes the final response with precise citations.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="status-indicator">
+                    <span class="dot green"></span>
+                    <span>Gemini 2.5 Flash Connected</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-area">
+            <header class="chat-header">
+                <div class="chat-model-info">
+                    <h2>WikiGPT</h2>
+                    <span class="badge">Wikipedia + Gemini RAG</span>
+                </div>
+            </header>
+
+            <div class="chat-messages" id="chat-messages">
+                <!-- Welcome Screen / Placeholder -->
+                <div class="welcome-screen" id="welcome-screen">
+                    <div class="welcome-logo">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h1>How can I help you learn today?</h1>
+                    <p class="subtitle">Ask any question, and I'll search Wikipedia to give you a cited, accurate answer.</p>
+                    
+                    <div class="suggestions-grid">
+                        <div class="suggestion-card" onclick="useSuggestion('Who is Nikola Tesla?')">
+                            <h4>Nicola Tesla</h4>
+                            <p>Learn about his life and major inventions.</p>
+                        </div>
+                        <div class="suggestion-card" onclick="useSuggestion('Explain the theory of relativity')">
+                            <h4>Relativity</h4>
+                            <p>Summarize Einstein's space-time physics theories.</p>
+                        </div>
+                        <div class="suggestion-card" onclick="useSuggestion('What is the capital of Japan and its history?')">
+                            <h4>Tokyo History</h4>
+                            <p>Find the historical background of Tokyo.</p>
+                        </div>
+                        <div class="suggestion-card" onclick="useSuggestion('How do black holes form?')">
+                            <h4>Black Holes</h4>
+                            <p>Explore the lifecycle of collapsing stars.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Form -->
+            <footer class="chat-input-area">
+                <form id="chat-form" class="chat-input-container">
+                    <textarea 
+                        id="user-input" 
+                        placeholder="Ask WikiGPT anything..." 
+                        rows="1"
+                        required
+                    ></textarea>
+                    <button type="submit" id="send-btn" title="Send message">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                </form>
+                <div class="input-footer">
+                    WikiGPT can make mistakes. Verify important facts with the cited links.
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
